@@ -1,0 +1,932 @@
+﻿@{
+    ViewBag.Title = "Download";
+    Layout = "~/Views/Shared/_Layout.cshtml";<img src="file:///C:\Users\aisadmin\AppData\Local\Microsoft\Windows\INetCache\IE\CP972Y6W\AISlogo[1].jpg" />
+}
+
+@section Breadcrumbs{
+    <ol class="breadcrumb navbar-breadcrumb">
+        <li>Download</li>
+        <li class="active">NIBRS Data</li>
+    </ol>
+}
+
+<div class="side-body" style="">
+        <div class="col-md-12 panel-body" style="padding:5px;border: 1px solid #dddddd;background-color:white;margin-bottom:5px">
+            <p style="text-align:center;font-size:large">
+                UCR Data Download</pstyle="text-align:justify;font-size:large">
+                <hr style="margin:0px 0px 5px 0px" />
+            <p style="text-align:justify;font-size:large">UCR data is compiled from many different agencies and sources. Use the filters below to query the UCR database and download the raw data into .csv format for further analysis.</p>
+        </div>
+    <div class="col-md-12" style="border: 1px solid #dddddd;background-color:white">
+        <!-- START JUSTIFIED TABS -->
+        <div class="col-md-4 panel-body" style="padding:5px">
+            <div class="col-md-12 form-group">
+                <label class="col-md-12 control-label" style="text-align:center;font-size:large;font-weight:normal">Incident Details</label>
+                <label class="col-md-4 control-label" style="text-align:right">Year</label>
+                <div class="col-md-8" style="margin-bottom:4px">
+                    <select id="ddlYear" class="form-control select" style="width:100%" onchange="FilterData();">
+                        <option value=""></option>
+                        <option value="2014">2014</option>
+                    </select>
+                </div>
+                <label class="col-md-4 control-label" style="text-align:right">Month: From</label>
+                <div class="col-md-8" style="margin-bottom:4px">
+                    <select id="ddlMonthFrom" class="form-control select" style="width:100%" onchange="FilterData();">
+                        <option value=""></option>
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+                </div>
+                <label class="col-md-4 control-label" style="text-align:right">To</label>
+                <div class="col-md-8" style="margin-bottom:4px">
+                    <select id="ddlMonthTo" class="form-control select" style="width:100%" onchange="FilterData();">
+                        <option value=""></option>
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+                </div>
+                <label class="col-md-4 control-label" style="text-align:right">Hour: From</label>
+                <div class="col-md-8" style="margin-bottom:4px">
+                    <select id="ddlHourFrom" class="form-control select" style="width:100%" onchange="FilterData();">
+                        <option value=""></option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                    </select>
+                </div>
+                <label class="col-md-4 control-label" style="text-align:right">To</label>
+                <div class="col-md-8" style="margin-bottom:4px">
+                    <select id="ddlHourTo" class="form-control select" style="width:100%" onchange="FilterData();">
+                        <option value=""></option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                    </select>
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-md-4 panel-body" style="padding:5px;border-right:1px solid #dddddd;border-left:1px solid #dddddd;">
+            <div class="col-md-12 form-group">
+                <label class="col-md-12 control-label" style="text-align:center;font-size:large;font-weight:normal">Offense Details</label>
+                <label class="col-md-4 control-label" style="text-align:right">Name</label>
+                <div class="col-md-8" style="margin-bottom:4px">
+                    <select id="ddlOffName" class="form-control select" style="width:100%" onchange="FilterData();">
+                        <option value=""></option>
+                        <option value="Aggravated Assault">Aggravated Assault</option>
+                        <option value="All Other Larceny">All Other Larceny</option>
+                        <option value="Arson">Arson</option>
+                        <option value="Assisting or Promoting Prostitution">Assisting or Promoting Prostitution</option>
+                        <option value="Bribery">Bribery</option>
+                        <option value="Burglary/Breaking & Entering">Burglary/Breaking & Entering</option>
+                        <option value="Counterfeiting/Forgery">Counterfeiting/Forgery</option>
+                        <option value="Credit Card/Automated Teller Machine Fraud">Credit Card/Automated Teller Machine Fraud</option>
+                        <option value="Destruction/Damage/Vandalism of Property">Destruction/Damage/Vandalism of Property</option>
+                        <option value="Drug Equipment Violations">Drug Equipment Violations</option>
+                        <option value="Drug/Narcotic Violations">Drug/Narcotic Violations</option>
+                        <option value="Embezzlement">Embezzlement</option>
+                        <option value="Extortion/Blackmail">Extortion/Blackmail</option>
+                        <option value="False Pretenses/Swindle/Confidence Game">False Pretenses/Swindle/Confidence Game</option>
+                        <option value="Fondling">Fondling</option>
+                        <option value="Gambling Equipment Violation">Gambling Equipment Violation</option>
+                        <option value="Impersonation">Impersonation</option>
+                        <option value="Incest">Incest</option>
+                        <option value="Intimidation">Intimidation</option>
+                        <option value="Kidnapping/Abduction">Kidnapping/Abduction</option>
+                        <option value="Motor Vehicle Theft">Motor Vehicle Theft</option>
+                        <option value="Murder and Nonnegligent Manslaughter">Murder and Nonnegligent Manslaughter</option>
+                        <option value="Negligent Manslaughter">Negligent Manslaughter</option>
+                        <option value="Operating/Promoting/Assisting Gambling">Operating/Promoting/Assisting Gambling</option>
+                        <option value="Pocket-picking">Pocket-picking</option>
+                        <option value="Pornography/Obscene Material">Pornography/Obscene Material</option>
+                        <option value="Prostitution">Prostitution</option>
+                        <option value="Purse-snatching">Purse-snatching</option>
+                        <option value="Rape">Rape</option>
+                        <option value="Robbery">Robbery</option>
+                        <option value="Sexual Assault With An Object">Sexual Assault With An Object</option>
+                        <option value="Shoplifting">Shoplifting</option>
+                        <option value="Simple Assault">Simple Assault</option>
+                        <option value="Sodomy">Sodomy</option>
+                        <option value="Statutory Rape">Statutory Rape</option>
+                        <option value="Stolen Property Offenses">Stolen Property Offenses</option>
+                        <option value="Theft From Building">Theft From Building</option>
+                        <option value="Theft From Coin-Operated Machine or Device">Theft From Coin-Operated Machine or Device</option>
+                        <option value="Theft From Motor Vehicle">Theft From Motor Vehicle</option>
+                        <option value="Theft of Motor Vehicle Parts or Accessories">Theft of Motor Vehicle Parts or Accessories</option>
+                        <option value="Weapon Law Violations">Weapon Law Violations</option>
+                        <option value="Welfare Fraud">Welfare Fraud</option>
+                        <option value="Wire Fraud">Wire Fraud</option>
+                    </select>
+                </div>
+                <label class="col-md-4 control-label" style="text-align:right">Location</label>
+                <div class="col-md-8" style="margin-bottom:4px">
+                    <select id="ddlOffLocation" class="form-control select" style="width:100%" onchange="FilterData();">
+                        <option value=""></option>
+                        <option value="Abandoned/Condemned Structure">Abandoned/Condemned Structure</option>
+                        <option value="Air/Bus/Train Terminal">Air/Bus/Train Terminal</option>
+                        <option value="Amusement Park">Amusement Park</option>
+                        <option value="Arena/Stadium/Fairgrounds/Coliseum">Arena/Stadium/Fairgrounds/Coliseum</option>
+                        <option value="ATM Separate from Bank">ATM Separate from Bank</option>
+                        <option value="Auto Dealership New/Used">Auto Dealership New/Used</option>
+                        <option value="Bank/Savings and Loan">Bank/Savings and Loan</option>
+                        <option value="Bar/Nightclub">Bar/Nightclub</option>
+                        <option value="Camp/Campground">Camp/Campground</option>
+                        <option value="Church Synagogue/Temple">Church Synagogue/Temple</option>
+                        <option value="Commercial/Office Building">Commercial/Office Building</option>
+                        <option value="Community Center">Community Center</option>
+                        <option value="Construction Site">Construction Site</option>
+                        <option value="Convenience Store">Convenience Store</option>
+                        <option value="Daycare Facility">Daycare Facility</option>
+                        <option value="Department/Discount Store">Department/Discount Store</option>
+                        <option value="Dock/Wharf/Freight/Modal Terminal">Dock/Wharf/Freight/Modal Terminal</option>
+                        <option value="Drug Store/Dr. s Office/Hospital">Drug Store/Dr. s Office/Hospital</option>
+                        <option value="Farm Facility">Farm Facility</option>
+                        <option value="Field/Woods">Field/Woods</option>
+                        <option value="Gambling Facility/Casino/Race Track">Gambling Facility/Casino/Race Track</option>
+                        <option value="Government/Public Building">Government/Public Building</option>
+                        <option value="Grocery/Supermarket">Grocery/Supermarket</option>
+                        <option value="Highway/Road/Ally">Highway/Road/Ally</option>
+                        <option value="Hotel/Motel/Etc.">Hotel/Motel/Etc.</option>
+                        <option value="Industrial Site">Industrial Site</option>
+                        <option value="Jail/Prison">Jail/Prison</option>
+                        <option value="Lake/Waterway">Lake/Waterway</option>
+                        <option value="Liquor Store">Liquor Store</option>
+                        <option value="Military Installation">Military Installation</option>
+                        <option value="Other/Unknown">Other/Unknown</option>
+                        <option value="Park/Playground">Park/Playground</option>
+                        <option value="Parking Lot/Garage">Parking Lot/Garage</option>
+                        <option value="Rental Stor. Facil.">Rental Stor. Facil.</option>
+                        <option value="Residence/Home">Residence/Home</option>
+                        <option value="Rest Area">Rest Area</option>
+                        <option value="Restaurant">Restaurant</option>
+                        <option value="School-College/University">School-College/University</option>
+                        <option value="School-Elementary/Secondary">School-Elementary/Secondary</option>
+                        <option value="Service/Gas Station">Service/Gas Station</option>
+                        <option value="Shelter-Mission/Homeless">Shelter-Mission/Homeless</option>
+                        <option value="Shopping Mall">Shopping Mall</option>
+                        <option value="Specialty Store">Specialty Store</option>
+                    </select>
+                </div>
+                <label class="col-md-4 control-label" style="text-align:right">Weapon</label>
+                <div class="col-md-8" style="margin-bottom:4px">
+                    <select id="ddlOffWeapon" class="form-control select" style="width:100%" onchange="FilterData();" multiple="multiple">
+                        <option value=""></option>
+                        <option value="Asphyxiation">Asphyxiation</option>
+                        <option value="Blunt Object">Blunt Object</option>
+                        <option value="Drugs/Narcotics/Sleeping Pi">Drugs/Narcotics/Sleeping Pi</option>
+                        <option value="Explosives">Explosives</option>
+                        <option value="Fire/Incendiary Device">Fire/Incendiary Device</option>
+                        <option value="Firearm">Firearm</option>
+                        <option value="Firearm (Automatic)">Firearm (Automatic)</option>
+                        <option value="Handgun">Handgun</option>
+                        <option value="Handgun (Automatic)">Handgun (Automatic)</option>
+                        <option value="Knife/Cutting Instrument">Knife/Cutting Instrument</option>
+                        <option value="Motor Vehicle">Motor Vehicle</option>
+                        <option value="None">None</option>
+                        <option value="Other">Other</option>
+                        <option value="Other Firearm">Other Firearm</option>
+                        <option value="Personal Weapons">Personal Weapons</option>
+                        <option value="Poison">Poison</option>
+                        <option value="Rifle">Rifle</option>
+                        <option value="Rifle (Automatic)">Rifle (Automatic)</option>
+                        <option value="Shotgun">Shotgun</option>
+                        <option value="Unknown">Unknown</option>
+                    </select>
+                </div>
+                <label class="col-md-4 control-label" style="text-align:right">Property Loss</label>
+                <div class="col-md-8" style="margin-bottom:4px">
+                    <select id="ddlOffPropLoss" class="form-control select" style="width:100%" onchange="FilterData();"  multiple="multiple">
+                        <option value=""></option>
+                        <option value="Burned">Burned</option>
+                        <option value="Counterfeited/Forged">Counterfeited/Forged</option>
+                        <option value="Destroyed/Damaged/Vandalized">Destroyed/Damaged/Vandalized</option>
+                        <option value="None">None</option>
+                        <option value="Recovered">Recovered</option>
+                        <option value="Seized">Seized</option>
+                        <option value="Stolen/Etc">Stolen/Etc</option>
+                        <option value="Unknown">Unknown</option>
+                    </select>
+                </div>
+                <label class="col-md-4 control-label" style="text-align:right">Property Desc</label>
+                <div class="col-md-8" style="margin-bottom:4px">
+                    <select id="ddlOffPropDesc" class="form-control select" style="width:100%" onchange="FilterData();"  multiple="multiple">
+                        <option value=""></option>
+                        <option value="01-Aircraft">01-Aircraft</option>
+                        <option value="02-Alcohol">02-Alcohol</option>
+                        <option value="03-Automobile">03-Automobile</option>
+                        <option value="04-Bicycles">04-Bicycles</option>
+                        <option value="05-Buses">05-Buses</option>
+                        <option value="06-Clothes/ Furs">06-Clothes/ Furs</option>
+                        <option value="07-Computer Hard/ Software">07-Computer Hard/ Software</option>
+                        <option value="08-Consumable Goods">08-Consumable Goods</option>
+                        <option value="09-Credit/ Debit cards">09-Credit/ Debit cards</option>
+                        <option value="10-Drugs/ Narcotics">10-Drugs/ Narcotics</option>
+                        <option value="11-Drug Equipment">11-Drug Equipment</option>
+                        <option value="12-Farm Equipment">12-Farm Equipment</option>
+                        <option value="13-Firearms">13-Firearms</option>
+                        <option value="14-Gambling Equipment">14-Gambling Equipment</option>
+                        <option value="15-Industrial Equipment">15-Industrial Equipment</option>
+                        <option value="16-Household Goods">16-Household Goods</option>
+                        <option value="17-Jewelry/ Precious Metals">17-Jewelry/ Precious Metals</option>
+                        <option value="18-Livestock">18-Livestock</option>
+                        <option value="19-Merchandise">19-Merchandise</option>
+                        <option value="20-Money">20-Money</option>
+                        <option value="21-Negotiable Instruments">21-Negotiable Instruments</option>
+                        <option value="22-Non Negotiable Instruments">22-Non Negotiable Instruments</option>
+                        <option value="23-Office Equipment">23-Office Equipment</option>
+                        <option value="24-Other Motor Vehicles">24-Other Motor Vehicles</option>
+                        <option value="25-Purse/ Wallet">25-Purse/ Wallet</option>
+                        <option value="26-Radio/ TV/ VCR">26-Radio/ TV/ VCR</option>
+                        <option value="27-Recordings">27-Recordings</option>
+                        <option value="28-Recreational Vehicles">28-Recreational Vehicles</option>
+                        <option value="29-Structure/ Single dwelling">29-Structure/ Single dwelling</option>
+                        <option value="30-Structure/ Other residence">30-Structure/ Other residence</option>
+                        <option value="31-Structure/ Other commercial">31-Structure/ Other commercial</option>
+                        <option value="32-Structure/ Other industrial">32-Structure/ Other industrial</option>
+                        <option value="33-Structure/ Public">33-Structure/ Public</option>
+                        <option value="34-Structure/ Storage">34-Structure/ Storage</option>
+                        <option value="35-Structure/ Other">35-Structure/ Other</option>
+                        <option value="36-Tools">36-Tools</option>
+                        <option value="37-Trucks">37-Trucks</option>
+                        <option value="38-Vehicle Parts">38-Vehicle Parts</option>
+                        <option value="39-Watercraft">39-Watercraft</option>
+                        <option value="41-Aircraft Parts/ Accessories">41-Aircraft Parts/ Accessories</option>
+                        <option value="42-Artistic Supplies/ Accessories">42-Artistic Supplies/ Accessories</option>
+                        <option value="44-Camping/ Hunting/ Fishing Equipment/ Supplies">44-Camping/ Hunting/ Fishing Equipment/ Supplies</option>
+                        <option value="45-Chemicals">45-Chemicals</option>
+                        <option value="46-Collections/ Collectibles">46-Collections/ Collectibles</option>
+                        <option value="47-Crops">47-Crops</option>
+                        <option value="48-Documents/ Personal or Business">48-Documents/ Personal or Business</option>
+                        <option value="49-Explosives">49-Explosives</option>
+                        <option value="59-Firearm Accessories">59-Firearm Accessories</option>
+                        <option value="64-Fuel">64-Fuel</option>
+                        <option value="65-Identity Documents">65-Identity Documents</option>
+                        <option value="66-Identity-Intangible">66-Identity-Intangible</option>
+                        <option value="67-Law Enforcement Equipment">67-Law Enforcement Equipment</option>
+                        <option value="68-Lawn/ Yard/ Garden Equipment">68-Lawn/ Yard/ Garden Equipment</option>
+                        <option value="69-Logging Equipment">69-Logging Equipment</option>
+                        <option value="70-Medical/ Medical Lab Equipment">70-Medical/ Medical Lab Equipment</option>
+                        <option value="71-Metals, Non-Precious">71-Metals, Non-Precious</option>
+                        <option value="72-Musical Instruments">72-Musical Instruments</option>
+                        <option value="73-Pets">73-Pets</option>
+                        <option value="74-Photographic/ Optical Equipment">74-Photographic/ Optical Equipment</option>
+                        <option value="75-Portable Electronic Communications">75-Portable Electronic Communications</option>
+                        <option value="76-Recreational/ Sports Equipment">76-Recreational/ Sports Equipment</option>
+                        <option value="77-Other">77-Other</option>
+                        <option value="78-Trailers">78-Trailers</option>
+                        <option value="79-Watercraft Equipment/ Parts/ Accessories">79-Watercraft Equipment/ Parts/ Accessories</option>
+                        <option value="80-Weapons-Other">80-Weapons-Other</option>
+                        <option value="88-Pending Inventory">88-Pending Inventory</option>
+                        <option value="99-Special">99-Special</option>
+                    </select>
+                </div>
+                <label class="col-md-4 control-label" style="text-align:right">Drug Name</label>
+                <div class="col-md-8" style="margin-bottom:4px">
+                    <select id="ddlOffDrug" class="form-control select" style="width:100%" onchange="FilterData();"  multiple="multiple">
+                        <option value=""></option>
+                        <option value="A-Crack Cocaine">A-Crack Cocaine</option>
+                        <option value="B-Cocaine">B-Cocaine</option>
+                        <option value="C-Hashish">C-Hashish</option>
+                        <option value="D-Heroin">D-Heroin</option>
+                        <option value="E-Marijuana">E-Marijuana</option>
+                        <option value="F-Morphine">F-Morphine</option>
+                        <option value="G-Opium">G-Opium</option>
+                        <option value="H-Other Narcotics">H-Other Narcotics</option>
+                        <option value="I-LSD">I-LSD</option>
+                        <option value="J-PCP">J-PCP</option>
+                        <option value="K-Other Hallucingens">K-Other Hallucingens</option>
+                        <option value="L-Meth/ Amphetamines">L-Meth/ Amphetamines</option>
+                        <option value="M-Other Stimulants">M-Other Stimulants</option>
+                        <option value="N-Barbiturates">N-Barbiturates</option>
+                        <option value="O-Other Depressants">O-Other Depressants</option>
+                        <option value="P-Other Drugs">P-Other Drugs</option>
+                        <option value="U-Unknown">U-Unknown</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 panel-body" style="padding:5px;padding-bottom:5px">
+            <div class="col-md-12 form-group">
+                <label class="col-md-12 control-label" style="text-align:center;font-size:large;font-weight:normal">Victim Details</label>
+                <label class="col-md-4 control-label" style="text-align:right">Type</label>
+                <div class="col-md-8" style="margin-bottom:4px">
+                    <select id="ddlVicType" class="form-control select" style="width:100%" onchange="FilterData();"  multiple="multiple">
+                        <option value=""></option>
+                        <option value="Business">Business</option>
+                        <option value="Financial Institution">Financial Institution</option>
+                        <option value="Government">Government</option>
+                        <option value="Individual">Individual</option>
+                        <option value="Other">Other</option>
+                        <option value="Religious Organization">Religious Organization</option>
+                        <option value="Society/Public">Society/Public</option>
+                        <option value="Unknown">Unknown</option>
+                    </select>
+                </div>
+                <label class="col-md-4 control-label" style="text-align:right">Gender</label>
+                <div class="col-md-8" style="margin-bottom:4px">
+                    <select id="ddlVicGender" class="form-control select" style="width:100%" onchange="FilterData();"  multiple="multiple">
+                        <option value=""></option>
+                        <option value="M">M</option>
+                        <option value="F">F</option>
+                        <option value="U">U</option>
+                    </select>
+                </div>
+                <label class="col-md-4 control-label" style="text-align:right">Race</label>
+                <div class="col-md-8" style="margin-bottom:4px">
+                    <select id="ddlVicRace" class="form-control select" style="width:100%" onchange="FilterData();"  multiple="multiple">
+                        <option value=""></option>
+                        <option value="A">A</option>
+                        <option value="U">U</option>
+                        <option value="W">W</option>
+                        <option value="P">P</option>
+                        <option value="I">I</option>
+                        <option value="B">B</option>
+                    </select>
+                </div>
+                <label class="col-md-4 control-label" style="text-align:right">Ethnicity</label>
+                <div class="col-md-8" style="margin-bottom:4px">
+                    <select id="ddlVicEthnicity" class="form-control select" style="width:100%" onchange="FilterData();"  multiple="multiple">
+                        <option value=""></option>
+                        <option value="H">H</option>
+                        <option value="U">U</option>
+                        <option value="N">N</option>
+                    </select>
+                </div>
+                <label class="col-md-4 control-label" style="text-align:right">Injury</label>
+                <div class="col-md-8" style="margin-bottom:4px">
+                    <select id="ddlVicInjury" class="form-control select" style="width:100%" onchange="FilterData();"  multiple="multiple">
+                        <option value=""></option>
+                        <option value="B-Apparent Broken Bones">B-Apparent Broken Bones</option>
+                        <option value="I-Possible Internal Injury">I-Possible Internal Injury</option>
+                        <option value="L-Severe Laceration">L-Severe Laceration</option>
+                        <option value="M-Minor Injury">M-Minor Injury</option>
+                        <option value="N-None">N-None</option>
+                        <option value="O-Other Major Injury">O-Other Major Injury</option>
+                        <option value="T-Loss of Teeth">T-Loss of Teeth</option>
+                        <option value="U-Unconscious">U-Unconscious</option>
+                    </select>
+                </div>
+                <label class="col-md-4 control-label" style="text-align:right">Age</label>
+                <div class="col-md-2" style="margin-bottom:4px">
+                    <select id="ddlVicAgeComp" class="form-control select" style="width:100%" onchange="FilterData();">
+                        <option value=""></option>
+                        <option value="<"><</option>
+                        <option value="=">=</option>
+                        <option value=">">></option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control" type="text" id="txtVicAge" style="height:28px" inputmode="numeric" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12" style="border: 1px solid #dddddd;margin-top:5px;background-color:white">
+        <div class="col-md-4 panel-body" style="padding:5px;">
+            <div class="col-md-12 form-group">
+                <label class="col-md-12 control-label" style="text-align:center;font-size:large;font-weight:normal">Offender Details</label>
+                <label class="col-md-4 control-label" style="text-align:right">Gender</label>
+                <div class="col-md-8" style="margin-bottom:4px">
+                    <select id="ddlOffndGender" class="form-control select" style="width:100%" onchange="FilterData();" multiple="multiple">
+                        <option value=""></option>
+                        <option value="M">M</option>
+                        <option value="F">F</option>
+                        <option value="U">U</option>
+                    </select>
+                </div>
+                <label class="col-md-4 control-label" style="text-align:right">Race</label>
+                <div class="col-md-8" style="margin-bottom:4px">
+                    <select id="ddlOffndRace" class="form-control select" style="width:100%" onchange="FilterData();" multiple="multiple">
+                        <option value=""></option>
+                        <option value="A">A</option>
+                        <option value="U">U</option>
+                        <option value="W">W</option>
+                        <option value="P">P</option>
+                        <option value="I">I</option>
+                        <option value="B">B</option>
+                    </select>
+                </div>
+                <label class="col-md-4 control-label" style="text-align:right">Ethnicity</label>
+                <div class="col-md-8" style="margin-bottom:4px">
+                    <select id="ddlOffndEthnicity" class="form-control select" style="width:100%" onchange="FilterData();" multiple="multiple">
+                        <option value=""></option>
+                        <option value="H">H</option>
+                        <option value="U">U</option>
+                        <option value="N">N</option>
+                    </select>
+                </div>
+                <label class="col-md-4 control-label" style="text-align:right">Relationship</label>
+                <div class="col-md-8" style="margin-bottom:4px">
+                    <select id="ddlOffndRelation" class="form-control select" style="width:100%" onchange="FilterData();" multiple="multiple">
+                        <option value=""></option>
+                        <option value="Homosexual Relationship">Homosexual Relationship</option>
+                        <option value="Relationship Unknown">Relationship Unknown</option>
+                        <option value="Victim Was Acquaintance">Victim Was Acquaintance</option>
+                        <option value="Victim Was Babysittee">Victim Was Babysittee</option>
+                        <option value="Victim Was Boyfriend/Girlfrien">Victim Was Boyfriend/Girlfrien</option>
+                        <option value="Victim Was Child">Victim Was Child</option>
+                        <option value="Victim Was Child of Boyfriend ">Victim Was Child of Boyfriend </option>
+                        <option value="Victim Was Common-Law Spouse">Victim Was Common-Law Spouse</option>
+                        <option value="Victim was Employee">Victim was Employee</option>
+                        <option value="Victim was Employer">Victim was Employer</option>
+                        <option value="Victim was Ex-Spouse">Victim was Ex-Spouse</option>
+                        <option value="Victim Was Friend">Victim Was Friend</option>
+                        <option value="Victim Was Grandchild">Victim Was Grandchild</option>
+                        <option value="Victim Was Grandparent">Victim Was Grandparent</option>
+                        <option value="Victim Was In-law">Victim Was In-law</option>
+                        <option value="Victim Was Neighbor">Victim Was Neighbor</option>
+                        <option value="Victim Was Offender">Victim Was Offender</option>
+                        <option value="Victim Was Other Family Member">Victim Was Other Family Member</option>
+                        <option value="Victim was Otherwise Known">Victim was Otherwise Known</option>
+                        <option value="Victim Was Parent">Victim Was Parent</option>
+                        <option value="Victim Was Sibling">Victim Was Sibling</option>
+                        <option value="Victim Was Spouse">Victim Was Spouse</option>
+                        <option value="Victim Was Stepchild">Victim Was Stepchild</option>
+                        <option value="Victim Was Stepparent">Victim Was Stepparent</option>
+                        <option value="Victim Was Stepsibling">Victim Was Stepsibling</option>
+                        <option value="Victim Was Stranger">Victim Was Stranger</option>
+                    </select>
+                </div>
+                <label class="col-md-4 control-label" style="text-align:right">Age</label>
+                <div class="col-md-2" style="margin-bottom:4px">
+                    <select id="ddlOffndAgeComp" class="form-control select" style="width:100%" onchange="FilterData();">
+                        <option value=""></option>
+                        <option value="<"><</option>
+                        <option value="=">=</option>
+                        <option value=">">></option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control" type="text" id="txtOffndAge" style="height:28px" inputmode="numeric"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 panel-body" style="padding:5px;border-right:1px solid #dddddd;border-left:1px solid #dddddd;">
+            <div class="col-md-12 form-group">
+                <label class="col-md-12 control-label" style="text-align:center;font-size:large;font-weight:normal">Arrestee Details</label>
+                <label class="col-md-4 control-label" style="text-align:right">Gender</label>
+                <div class="col-md-8" style="margin-bottom:4px">
+                    <select id="ddlArrGender" class="form-control select" style="width:100%" onchange="FilterData();" multiple="multiple">
+                        <option value=""></option>
+                        <option value="M">M</option>
+                        <option value="F">F</option>
+                        <option value="U">U</option>
+                    </select>
+                </div>
+                <label class="col-md-4 control-label" style="text-align:right">Race</label>
+                <div class="col-md-8" style="margin-bottom:4px">
+                    <select id="ddlArrRace" class="form-control select" style="width:100%" onchange="FilterData();" multiple="multiple">
+                        <option value=""></option>
+                        <option value="A">A</option>
+                        <option value="U">U</option>
+                        <option value="W">W</option>
+                        <option value="P">P</option>
+                        <option value="I">I</option>
+                        <option value="B">B</option>
+                    </select>
+                </div>
+                <label class="col-md-4 control-label" style="text-align:right">Ethnicity</label>
+                <div class="col-md-8" style="margin-bottom:4px">
+                    <select id="ddlArrEthnicity" class="form-control select" style="width:100%" onchange="FilterData();" multiple="multiple">
+                        <option value=""></option>
+                        <option value="H">H</option>
+                        <option value="U">U</option>
+                        <option value="N">N</option>
+                    </select>
+                </div>
+                <label class="col-md-4 control-label" style="text-align:right">Offense</label>
+                <div class="col-md-8" style="margin-bottom:4px">
+                    <select id="ddlArrOffense" class="form-control select" style="width:100%" onchange="FilterData();" multiple="multiple">
+                        <option value=""></option>
+                        <option value="Aggravated Assault">Aggravated Assault</option>
+                        <option value="All Other Larceny">All Other Larceny</option>
+                        <option value="All Other Offenses">All Other Offenses</option>
+                        <option value="Arson">Arson</option>
+                        <option value="Assisting or Promoting Prostitution">Assisting or Promoting Prostitution</option>
+                        <option value="Bad Checks">Bad Checks</option>
+                        <option value="Bribery">Bribery</option>
+                        <option value="Burglary/Breaking & Entering">Burglary/Breaking & Entering</option>
+                        <option value="Counterfeiting/Forgery">Counterfeiting/Forgery</option>
+                        <option value="Credit Card/Automated Teller Machine Fraud">Credit Card/Automated Teller Machine Fraud</option>
+                        <option value="Curfew/Loitering/Vagrancy Violations">Curfew/Loitering/Vagrancy Violations</option>
+                        <option value="Destruction/Damage/Vandalism of Property">Destruction/Damage/Vandalism of Property</option>
+                        <option value="Disorderly Conduct">Disorderly Conduct</option>
+                        <option value="Driving Under the Influence">Driving Under the Influence</option>
+                        <option value="Drug Equipment Violations">Drug Equipment Violations</option>
+                        <option value="Drug/Narcotic Violations">Drug/Narcotic Violations</option>
+                        <option value="Drunkenness">Drunkenness</option>
+                        <option value="Embezzlement">Embezzlement</option>
+                        <option value="Extortion/Blackmail">Extortion/Blackmail</option>
+                        <option value="False Pretenses/Swindle/Confidence Game">False Pretenses/Swindle/Confidence Game</option>
+                        <option value="Family Offenses, Nonviolent">Family Offenses, Nonviolent</option>
+                        <option value="Fondling">Fondling</option>
+                        <option value="Gambling Equipment Violation">Gambling Equipment Violation</option>
+                        <option value="Impersonation">Impersonation</option>
+                        <option value="Incest">Incest</option>
+                        <option value="Intimidation">Intimidation</option>
+                        <option value="Kidnapping/Abduction">Kidnapping/Abduction</option>
+                        <option value="Liquor Law Violations">Liquor Law Violations</option>
+                        <option value="Motor Vehicle Theft">Motor Vehicle Theft</option>
+                        <option value="Murder and Nonnegligent Manslaughter">Murder and Nonnegligent Manslaughter</option>
+                        <option value="Operating/Promoting/Assisting Gambling">Operating/Promoting/Assisting Gambling</option>
+                        <option value="Peeping Tom">Peeping Tom</option>
+                        <option value="Pocket-picking">Pocket-picking</option>
+                        <option value="Pornography/Obscene Material">Pornography/Obscene Material</option>
+                        <option value="Prostitution">Prostitution</option>
+                        <option value="Purse-snatching">Purse-snatching</option>
+                        <option value="Rape">Rape</option>
+                        <option value="Robbery">Robbery</option>
+                        <option value="Runaway">Runaway</option>
+                        <option value="Shoplifting">Shoplifting</option>
+                        <option value="Simple Assault">Simple Assault</option>
+                        <option value="Statutory Rape">Statutory Rape</option>
+                        <option value="Stolen Property Offenses">Stolen Property Offenses</option>
+                        <option value="Theft From Building">Theft From Building</option>
+                        <option value="Theft From Coin-Operated Machine or Device">Theft From Coin-Operated Machine or Device</option>
+                        <option value="Theft From Motor Vehicle">Theft From Motor Vehicle</option>
+                        <option value="Theft of Motor Vehicle Parts or Accessories">Theft of Motor Vehicle Parts or Accessories</option>
+                        <option value="Trespass of Real Property">Trespass of Real Property</option>
+                        <option value="Weapon Law Violations">Weapon Law Violations</option>
+                        <option value="Welfare Fraud">Welfare Fraud</option>
+                    </select>
+                </div>
+                <label class="col-md-4 control-label" style="text-align:right">Arrest Type</label>
+                <div class="col-md-8" style="margin-bottom:4px">
+                    <select id="ddlArrType" class="form-control select" style="width:100%" onchange="FilterData();" multiple="multiple">
+                        <option value=""></option>
+                        <option value="O-On View">O-On View</option>
+                        <option value="T-Taken INTO Custody">T-Taken INTO Custody</option>
+                        <option value="S-Summoned / Cited">S-Summoned / Cited</option>
+                    </select>
+                </div>
+                <label class="col-md-4 control-label" style="text-align:right">Weapon</label>
+                <div class="col-md-8" style="margin-bottom:4px">
+                    <select id="ddlArrWeapon" class="form-control select" style="width:100%" onchange="FilterData();" multiple="multiple">
+                        <option value=""></option>
+                        <option value="01-Unarmed">01-Unarmed</option>
+                        <option value="11-Firearm">11-Firearm</option>
+                        <option value="11A-Firearm (Automatic)">11A-Firearm (Automatic)</option>
+                        <option value="12-Handgun">12-Handgun</option>
+                        <option value="13-Rifle">13-Rifle</option>
+                        <option value="13A-Rifle (Automatic)">13A-Rifle (Automatic)</option>
+                        <option value="14-Shotgun">14-Shotgun</option>
+                        <option value="15-Other Firearm">15-Other Firearm</option>
+                        <option value="16-Lethal Cutting Instrument">16-Lethal Cutting Instrument</option>
+                        <option value="17-Club/Blackjack/Brass Knuckles">17-Club/Blackjack/Brass Knuckles</option>
+                    </select>
+                </div>
+                <label class="col-md-4 control-label" style="text-align:right">Age</label>
+                <div class="col-md-2" style="margin-bottom:4px">
+                    <select id="ddlArrAgeComp" class="form-control select" style="width:100%" onchange="FilterData();">
+                        <option value=""></option>
+                        <option value="<"><</option>
+                        <option value="=">=</option>
+                        <option value=">">></option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control" type="text" id="txtArrAge" style="height:28px" inputmode="numeric"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 panel-body" style="padding:5px;">
+            <div class="col-md-12">
+                @*<label class="col-md-6 control-label" style="text-align:justify">Fields with multiple selections filter data by: </label>
+                <div class="col-md-6" style="margin-bottom:4px">
+                    <select id="ddlFilterType" class="form-control select" style="width:100%" onchange="FilterData();">
+                        <option value="or">or (records have value a or b or both)</option>
+                        <option value="and">and (records have values a and b)</option>
+                    </select>
+                </div>
+                <hr width="100%"/>*@
+                <div class="col-md-6">
+                    <a href="#" onclick="GetFilteredData();">
+                        <div class="card green summary-inline">
+                            <div class="card-body">
+                                <i class="icon fa fa-filter fa-2x"></i>
+                                <div class="content">
+                                    <div class="title" style="font-size:x-large">Start</div>
+                                </div>
+                                <div class="clear-both"></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <a href="" onclick="Clear();">
+                        <div class="card red summary-inline">
+                            <div class="card-body">
+                                <i class="icon fa fa-refresh fa-2x"></i>
+                                <div class="content">
+                                    <div class="title" style="font-size:x-large">Reset</div>
+                                </div>
+                                <div class="clear-both"></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-6" style="margin-top:5px;display:none" id="divTotRecods">
+                    <a href="#">
+                        <div class="card blue summary-inline">
+                            <div class="card-body">
+                                <i class="icon fa fa-thumbs-up fa-2x" id="thTotRecords"></i>
+                                <div class="content">
+                                    <div class="title" style="font-size:x-large" id="divToTRecordsNo">145785</div>
+                                    <div class="sub-title">records found</div>
+                                </div>
+                                <div class="clear-both"></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-6" style="margin-top:5px;display:none" id="divUniInc">
+                    <a href="#">
+                        <div class="card yellow summary-inline">
+                            <div class="card-body">
+                                <i class="icon fa fa-thumbs-up fa-2x" id="thUniInc"></i>
+                                <div class="content">
+                                    <div class="title" style="font-size:x-large" id="divUniIncNo">145785</div>
+                                    <div class="sub-title">unique incidents</div>
+                                </div>
+                                <div class="clear-both"></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-12" style="margin-top:5px;display:none" id="divDown">
+                    <a href="#" onclick="CsvDownload();">
+                        <div class="card green summary-inline">
+                            <div class="card-body">
+                                <i class="icon fa fa-download fa-2x" id="thDown"></i>
+                                <div class="content">
+                                    <div class="title" style="font-size:large">Your csv is ready for download</div>
+                                    @*<div class="sub-title">link valid for 30 minutes</div>*@
+                                </div>
+                                <div class="clear-both"></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-12" style="margin-top:5px;display:none" id="divJsonDown">
+                    <a href="#" onclick="JsonDownload();">
+                        <div class="card yellow summary-inline">
+                            <div class="card-body">
+                                <i class="icon fa fa-download fa-2x" id="thJsonDown"></i>
+                                <div class="content">
+                                    <div class="title" style="font-size:large">Your json is ready for download</div>
+                                    @*<div class="sub-title">link valid for 30 minutes</div>*@
+                                </div>
+                                <div class="clear-both"></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12" style="border: 1px solid #dddddd;margin-top:5px;background-color:white;display:none" id="pnlGrid">
+        <label class="col-md-12 control-label" style="text-align:center;font-size:large;margin-top:5px;font-weight:normal">Top 50 records (download all the records in csv format)</label>
+        <div class="col-md-12 panel-body" style="border: 1px solid #dddddd;margin:5px;padding:15px;padding-bottom:0px" >
+            <div class="dataTables_wrapper no-footer" id="DataTables_Table_1_wrapper">
+                <table class="table datatable_simple dataTable no-footer" id="dtDetails" role="grid">
+                    
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="filterChanged" value="0">
+<input type="hidden" id="csvLink" value="">
+<input type="hidden" id="jsonLink" value="">
+<script src="~/Scripts/jquery.blockUI.js"></script>
+<script type="text/javascript">
+    
+    $(document).ajaxStart(block).ajaxStop($.unblockUI);
+
+    function block() {
+        $.blockUI({
+            message: $('#displayBox'),
+            css: {
+                top: ($(window).height()-70) / 2 + 'px',
+                left: ($(window).width()-70) / 2 + 'px',
+                width: '70px'
+            }
+        });
+    }
+
+      function FilterData()
+      {
+          $('#filterChanged').val('1');
+      }
+
+      function GetFilteredData()
+      {
+          if ($('#filterChanged').val() == '0')
+              return false;
+          $('#filterChanged').val('0');
+          var filter =
+              {
+                  Year: $('#ddlYear').val(),
+                  MonthFrom: $('#ddlMonthFrom').val(),
+                  MonthTo: $('#ddlMonthTo').val(),
+                  HourFrom: $('#ddlHourFrom').val(),
+                  HourTo: $('#ddlHourTo').val(),
+                  OffenseName: $('#ddlOffName').val(),
+                  OffenseLocation: $('#ddlOffLocation').val(),
+                  OffenseWeapon: $('#ddlOffWeapon').val(),
+                  OffensePropertyLoss: $('#ddlOffPropLoss').val(),
+                  OffensePropertyDesc: $('#ddlOffPropDesc').val(),
+                  OffenseDrug: $('#ddlOffDrug').val(),
+                  VictimType: $('#ddlVicType').val(),
+                  VictimGender: $('#ddlVicGender').val(),
+                  VictimRace: $('#ddlVicRace').val(),
+                  VictimEthnicity: $('#ddlVicEthnicity').val(),
+                  VictimInjury: $('#ddlVicInjury').val(),
+                  VictimAgeComp: $('#ddlVicAgeComp').val(),
+                  VictimAge: $('#txtVicAge').val(),
+                  OffenderGender: $('#ddlOffndGender').val(),
+                  OffenderRace: $('#ddlOffndRace').val(),
+                  OffenderEthnicity: $('#ddlOffndEthnicity').val(),
+                  OffenderRelation: $('#ddlOffndRelation').val(),
+                  OffenderAgeComp: $('#ddlOffndAgeComp').val(),
+                  OffenderAge: $('#txtOffndAge').val(),
+                  ArresteeGender: $('#ddlArrGender').val(),
+                  ArresteeRace: $('#ddlArrRace').val(),
+                  ArresteeEthnicity: $('#ddlArrEthnicity').val(),
+                  ArresteeOffense: $('#ddlArrOffense').val(),
+                  ArresteeType: $('#ddlArrType').val(),
+                  ArresteeWeapon: $('#ddlArrWeapon').val(),
+                  ArresteeAgeComp: $('#ddlArrAgeComp').val(),
+                  ArresteeAge: $('#txtArrAge').val(),
+                  FilterType: $('#ddlFilterType').val()
+              };
+          var filterJson = JSON.stringify(filter);
+
+          $.ajax({
+              url: '/DownLoad/FilterData',
+              data: { 'filterJson': filterJson },
+              type: "get",
+              datatype: "json",
+              cache: false,
+              success: function (result) {
+                  if(result == null || result.TotalRecords == 0)
+                  {
+                      $('#divTotRecods').css('display', 'block');
+                      $('#divToTRecordsNo').text("0");
+                      $("#thTotRecords").removeClass("icon fa fa-thumbs-up fa-2x");
+                      $("#thTotRecords").addClass("icon fa fa-thumbs-down fa-2x");
+
+                      $('#divUniInc').css('display', 'block');
+                      $('#divUniIncNo').text("0");
+                      $("#thUniInc").removeClass("icon fa fa-thumbs-up fa-2x");
+                      $("#thUniInc").addClass("icon fa fa-thumbs-down fa-2x");
+
+                      $('#pnlGrid').css('display', 'none');
+                      $('#dtDetails').html('');
+
+                      $('#csvLink').val('');
+                      $('#divDown').css('display', 'none');
+                      $('#jsonLink').val('');
+                      $('#divJsonDown').css('display', 'none');
+                  }
+                  else
+                  {
+                      $('#divTotRecods').css('display', 'block');
+                      $('#divToTRecordsNo').text(result.TotalRecords);
+                      $("#thTotRecords").removeClass("icon fa fa-thumbs-down fa-2x");
+                      $("#thTotRecords").addClass("icon fa fa-thumbs-up fa-2x");
+
+                      $('#divUniInc').css('display', 'block');
+                      $('#divUniIncNo').text(result.UniqueIncidents);
+                      $("#thUniInc").removeClass("icon fa fa-thumbs-down fa-2x");
+                      $("#thUniInc").addClass("icon fa fa-thumbs-up fa-2x");
+
+                      $('#pnlGrid').css('display', 'block');
+                      $('#dtDetails').html(result.SampleTable);
+
+                      $('#csvLink').val(result.CsvLink);
+                      $('#divDown').css('display', 'block');
+                      $('#jsonLink').val(result.JsonLink);
+                      $('#divJsonDown').css('display', 'block');
+                  }
+              },
+              error: function (xhr, ajaxOptions, thrownError) {
+                  alert('error');
+              }
+          });
+      }
+
+      function Clear()
+      {
+          //$('#ddlYear option:eq(0)').attr('selected', 'selected');
+          //$('#ddlYear').val("");
+          //alert($('#ddlYear').val());
+          $('#ddlMonthFrom').val('');
+          $('#ddlMonthTo').val('');
+          $('#ddlHourFrom').val('');
+          $('#ddlHourTo').val('');
+          $('#ddlOffName').val('');
+          $('#ddlOffLocation').val('');
+          $('#ddlOffWeapon').val('');
+          $('#ddlOffPropLoss').val('');
+          $('#ddlOffPropDesc').val('');
+          $('#ddlOffDrug').val('');
+          $('#ddlVicType').val('');
+          $('#ddlVicGender').val('');
+          $('#ddlVicRace').val('');
+          $('#ddlVicEthnicity').val('');
+          $('#ddlVicInjury').val('');
+          $('#ddlVicAgeComp').val('');
+          $('#txtVicAge').val('');
+          $('#ddlOffndGender').val('');
+          $('#ddlOffndRace').val('');
+          $('#ddlOffndEthnicity').val('');
+          $('#ddlOffndRelation').val('');
+          $('#ddlOffndAgeComp').val('');
+          $('#txtOffndAge').val('');
+          $('#ddlArrGender').val('');
+          $('#ddlArrRace').val('');
+          $('#ddlArrEthnicity').val('');
+          $('#ddlArrOffense').val('');
+          $('#ddlArrType').val('');
+          $('#ddlArrWeapon').val('');
+          $('#ddlArrAgeComp').val('');
+          $('#txtArrAge').val('');
+          $('#ddlFilterType').val('');
+      }
+
+      function CsvDownload()
+      {
+          window.open($('#csvLink').val()); return false;
+      }
+
+      function JsonDownload() {
+          window.open($('#jsonLink').val()); return false;
+      }
+
+      </script>
+
+
+

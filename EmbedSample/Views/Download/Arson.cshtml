@@ -1,0 +1,309 @@
+﻿@{
+    ViewBag.Title = "Download";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Breadcrumbs{
+    <ol class="breadcrumb navbar-breadcrumb">
+        <li>Download</li>
+        <li class="active">Arson Data</li>
+    </ol>
+}
+
+<div class="side-body" style="">
+    <div class="col-md-12">
+        <div class="col-md-12 panel-body" style="padding:5px;border: 1px solid #dddddd;background-color:white;margin-bottom:5px">
+            <p style="text-align:center;font-size:large">UCR Data Download</pstyle="text-align:justify;font-size:large">
+            <hr style="margin:0px 0px 5px 0px"/>
+            <p style="text-align:justify;font-size:large">UCR data is compiled from many different agencies and sources. Use the filters below to query the UCR database and download the raw data into .csv format for further analysis.</p>
+        </div>
+        </div>
+        <div class="col-md-12">
+            <!-- START JUSTIFIED TABS -->
+            <div class="col-md-6 panel-body" style="padding:5px;border: 1px solid #dddddd;background-color:white">
+                <div class="col-md-12 form-group">
+                    <label class="col-md-12 control-label" style="text-align:center;font-size:large;font-weight:normal">Incident Details</label>
+                    <label class="col-md-4 control-label" style="text-align:right">Year</label>
+                    <div class="col-md-8" style="margin-bottom:4px">
+                        <select id="ddlYear" class="form-control select" style="width:100%" onchange="FilterData();">
+                            <option value=""></option>
+                            <option value="2014">2014</option>
+                        </select>
+                    </div>
+                    <label class="col-md-4 control-label" style="text-align:right">Month: From</label>
+                    <div class="col-md-8" style="margin-bottom:4px">
+                        <select id="ddlMonthFrom" class="form-control select" style="width:100%" onchange="FilterData();">
+                            <option value=""></option>
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                    </div>
+                    <label class="col-md-4 control-label" style="text-align:right">To</label>
+                    <div class="col-md-8" style="margin-bottom:4px">
+                        <select id="ddlMonthTo" class="form-control select" style="width:100%" onchange="FilterData();">
+                            <option value=""></option>
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                    </div>
+                    <label class="col-md-4 control-label" style="text-align:right">Offense Name</label>
+                    <div class="col-md-8" style="margin-bottom:4px">
+                        <select id="ddlOffName" class="form-control select" style="width:100%" onchange="FilterData();" multiple="multiple">
+                            <option value=""></option>
+                            <option value="COM-Other Commercial">COM-Other Commercial</option>
+                            <option value="IND-Industrial/Manufacturing">IND-Industrial/Manufacturing</option>
+                            <option value="MV-Motor Vehicles">MV-Motor Vehicles</option>
+                            <option value="NSC-Not Specified Classificati">NSC-Not Specified Classificati</option>
+                            <option value="NSM-Not Specified - Mobile">NSM-Not Specified - Mobile</option>
+                            <option value="NSS-Not Specified - Structure">NSS-Not Specified - Structure</option>
+                            <option value="OMP-Other Mobile Property">OMP-Other Mobile Property</option>
+                            <option value="OR-Other Residential">OR-Other Residential</option>
+                            <option value="OST-All Other Structure">OST-All Other Structure</option>
+                            <option value="OTH-Other">OTH-Other</option>
+                            <option value="PUB-Community/Public">PUB-Community/Public</option>
+                            <option value="SOR-Single Occupancy Residenti">SOR-Single Occupancy Residenti</option>
+                            <option value="STR-Storage">STR-Storage</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6 panel-body" style="padding:5px;border: 1px solid #dddddd;background-color:white;">
+                <div class="col-md-12">
+                    @*<label class="col-md-6 control-label" style="text-align:justify">Fields with multiple selections filter data by: </label>
+                        <div class="col-md-6" style="margin-bottom:4px">
+                            <select id="ddlFilterType" class="form-control select" style="width:100%" onchange="FilterData();">
+                                <option value="or">or (records have value a or b or both)</option>
+                                <option value="and">and (records have values a and b)</option>
+                            </select>
+                        </div>
+                        <hr width="100%"/>*@
+                    <div class="col-md-6">
+                        <a href="#" onclick="GetFilteredData();">
+                            <div class="card green summary-inline">
+                                <div class="card-body">
+                                    <i class="icon fa fa-filter fa-2x"></i>
+                                    <div class="content">
+                                        <div class="title" style="font-size:x-large">Start</div>
+                                    </div>
+                                    <div class="clear-both"></div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="#" onclick="Clear();">
+                            <div class="card red summary-inline">
+                                <div class="card-body">
+                                    <i class="icon fa fa-refresh fa-2x"></i>
+                                    <div class="content">
+                                        <div class="title" style="font-size:x-large">Reset</div>
+                                    </div>
+                                    <div class="clear-both"></div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-12" style="margin-top:5px;display:none" id="divTotRecods">
+                        <a href="#">
+                            <div class="card yellow summary-inline">
+                                <div class="card-body">
+                                    <i class="icon fa fa-thumbs-up fa-2x" id="thTotRecords"></i>
+                                    <div class="content">
+                                        <div class="title" style="font-size:x-large" id="divToTRecordsNo">145785</div>
+                                        <div class="sub-title">records found</div>
+                                    </div>
+                                    <div class="clear-both"></div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    @*<div class="col-md-6" style="margin-top:5px;display:none" id="divUniInc">
+                            <a href="#">
+                                <div class="card yellow summary-inline">
+                                    <div class="card-body">
+                                        <i class="icon fa fa-thumbs-up fa-2x" id="thUniInc"></i>
+                                        <div class="content">
+                                            <div class="title" style="font-size:x-large" id="divUniIncNo">145785</div>
+                                            <div class="sub-title">unique incidents</div>
+                                        </div>
+                                        <div class="clear-both"></div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>*@
+                    <div class="col-md-12" style="margin-top:5px;display:none" id="divDown">
+                        <a href="#" onclick="CsvDownload();">
+                            <div class="card blue summary-inline">
+                                <div class="card-body">
+                                    <i class="icon fa fa-download fa-2x" id="thDown"></i>
+                                    <div class="content">
+                                        <div class="title" style="font-size:x-large">Your csv is ready for download</div>
+                                        @*<div class="sub-title">link valid for 30 minutes</div>*@
+                                    </div>
+                                    <div class="clear-both"></div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-12" style="margin-top:5px;display:none" id="divJsonDown">
+                        <a href="#" onclick="JsonDownload();">
+                            <div class="card yellow summary-inline">
+                                <div class="card-body">
+                                    <i class="icon fa fa-download fa-2x" id="thJsonDown"></i>
+                                    <div class="content">
+                                        <div class="title" style="font-size:x-large">Your json is ready for download</div>
+                                        @*<div class="sub-title">link valid for 30 minutes</div>*@
+                                    </div>
+                                    <div class="clear-both"></div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12" style="border: 1px solid #dddddd;margin-top:5px;background-color:white;display:none" id="pnlGrid">
+            <label class="col-md-12 control-label" style="text-align:center;font-size:large;margin-top:5px;font-weight:normal">Top 50 records (download all the records in csv format)</label>
+            <div class="col-md-12 panel-body" style="border: 1px solid #dddddd;margin:5px;padding:15px;padding-bottom:0px">
+                <div class="dataTables_wrapper no-footer" id="DataTables_Table_1_wrapper">
+                    <table class="table datatable_simple dataTable no-footer" id="dtDetails" role="grid"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+<input type="hidden" id="filterChanged" value="0">
+<input type="hidden" id="csvLink" value="">
+<input type="hidden" id="jsonLink" value="">
+<script src="~/Scripts/jquery.blockUI.js"></script>
+<script type="text/javascript">
+
+    $(document).ajaxStart(block).ajaxStop($.unblockUI);
+
+    function block()
+    {
+        $.blockUI({
+            message: $('#displayBox'),
+            css: {
+                top: ($(window).height()-70) / 2 + 'px',
+                left: ($(window).width()-70) / 2 + 'px',
+                width: '70px'
+            }
+        });
+    }
+
+      function FilterData()
+      {
+          $('#filterChanged').val('1');
+      }
+
+      function GetFilteredData()
+      {
+          if ($('#filterChanged').val() == '0')
+              return false;
+          $('#filterChanged').val('0');
+          var filter =
+              {
+                  Year: $('#ddlYear').val(),
+                  MonthFrom: $('#ddlMonthFrom').val(),
+                  MonthTo: $('#ddlMonthTo').val(),
+                  OffenseName: $('#ddlOffName').val(),
+              };
+          var filterJson = JSON.stringify(filter);
+
+          $.ajax({
+              url: '/DownLoad/FilterArsonData',
+              data: { 'filterJson': filterJson },
+              type: "get",
+              datatype: "json",
+              cache: false,
+              success: function (result) {
+                  if(result == null || result.TotalRecords == 0)
+                  {
+                      $('#divTotRecods').css('display', 'block');
+                      $('#divToTRecordsNo').text("0");
+                      $("#thTotRecords").removeClass("icon fa fa-thumbs-up fa-2x");
+                      $("#thTotRecords").addClass("icon fa fa-thumbs-down fa-2x");
+
+                      //$('#divUniInc').css('display', 'block');
+                      //$('#divUniIncNo').text("0");
+                      //$("#thUniInc").removeClass("icon fa fa-thumbs-up fa-2x");
+                      //$("#thUniInc").addClass("icon fa fa-thumbs-down fa-2x");
+
+                      $('#pnlGrid').css('display', 'none');
+                      $('#dtDetails').html('');
+
+                      $('#csvLink').val('');
+                      $('#divDown').css('display', 'none');
+                      $('#jsonLink').val('');
+                      $('#divJsonDown').css('display', 'none');
+                  }
+                  else
+                  {
+                      $('#divTotRecods').css('display', 'block');
+                      $('#divToTRecordsNo').text(result.TotalRecords);
+                      $("#thTotRecords").removeClass("icon fa fa-thumbs-down fa-2x");
+                      $("#thTotRecords").addClass("icon fa fa-thumbs-up fa-2x");
+
+                      //$('#divUniInc').css('display', 'block');
+                      //$('#divUniIncNo').text(result.UniqueIncidents);
+                      //$("#thUniInc").removeClass("icon fa fa-thumbs-down fa-2x");
+                      //$("#thUniInc").addClass("icon fa fa-thumbs-up fa-2x");
+
+                      $('#pnlGrid').css('display', 'block');
+                      $('#dtDetails').html(result.SampleTable);
+
+                      $('#csvLink').val(result.CsvLink);
+                      $('#divDown').css('display', 'block');
+                      $('#jsonLink').val(result.JsonLink);
+                      $('#divJsonDown').css('display', 'block');
+                  }
+              },
+              error: function (xhr, ajaxOptions, thrownError) {
+                  alert('error');
+              }
+          });
+      }
+
+      function Clear()
+      {
+          location.reload();
+          $('#ddlYear').val("");
+          $('#ddlMonthFrom').val('');
+          $('#ddlMonthTo').val('');
+          $('#ddlOffName').val('');
+      }
+
+      function CsvDownload()
+      {
+          window.open($('#csvLink').val()); return false;
+      }
+
+      function JsonDownload() {
+          window.open($('#jsonLink').val()); return false;
+      }
+
+</script>
+
+
+

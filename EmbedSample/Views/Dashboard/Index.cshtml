@@ -1,0 +1,100 @@
+﻿@section Breadcrumbs{
+    <ol class="breadcrumb navbar-breadcrumb">
+        <li>Uniform Crime Reporting Program</li>
+    </ol>
+}
+
+@model ReportViewModel
+<div class="side-body padding-top">
+    <div class="row col-md-12" style="padding-right:0px;margin-right:-15px">
+        <img src="../img/aisbanner.png" style="width:100%;height:150px;padding-right:0px;margin-right:0px" />
+    </div>
+    <div class="row  no-margin-bottom">
+        <div class="col-md-12">
+            <div class="card card-success" style="margin-right:15px">
+                <div class="card-header">
+                    <div class="card-title" style="width:100%;padding-bottom:0.6em;padding-top:0.6em">
+                        <div class="title" style="font-size:x-large;text-align: center;width:100%">AIS Models FBI Uniform Crime Reporting Data</div>
+                    </div>
+                    <div class="clear-both"></div>
+                </div>
+                <div class="card-body">
+                    <div class="col-md-6">
+                        <p style="text-align:justify">The FBI’s Uniform Crime Reporting (UCR) Program is a nationwide, cooperative statistical effort of more than 18,000 city, university and college, county, state, tribal, and federal law enforcement agencies voluntarily reporting data on crimes brought to their attention.  </p>
+
+                        <div class="card card-red" style="box-shadow:none">
+                            <div class="card-header" style="height:40px;background-color:#22A7F0">
+                                <div class="card-title" style="padding-top:8px">
+                                    <div class="title" style="font-size:large">Background</div>
+                                </div>
+                                <div class="clear-both"></div>
+                            </div>
+                            <div class="card-body" style="padding:10px 0px 0px 0px">
+                                    <p style="text-align:justify">The current UCR data reporting tool was built in Cold Fusion and has not received an update since 2010. Besides having an outdated interface, the canned summary roll-up style reports do not provide enough insight into the vast amounts of collected data. FBI Director Comey has made Uniform Crime Reporting (UCR) Data Modernization one of his top priorities.</p>
+                                    <p style="text-align:justify">The FBI released an RFI solicitation with the intent to gather information about possible ways to replace the current UCR tool. Criteria for the new tool is that it should be web based with the ability to filter on any UCR attribute and then export the results in a .csv format. The FBI included 2 gigabytes of sample data and example questions for how the solution would handle correlating the different types of crime data.</p>
+                            </div>
+                        </div>
+                        <div class="card card-red" style="box-shadow:none">
+                            <div class="card-header" style="height:40px;background-color:#22A7F0">
+                                <div class="card-title" style="padding-top:8px">
+                                    <div class="title" style="font-size:large">Challenge</div>
+                                </div>
+                                <div class="clear-both"></div>
+                            </div>
+                            <div class="card-body" style="padding:10px 0px 0px 0px">
+                                <p style="text-align:justify">AIS set out to determine if, in just a few weeks, a minimally viable product (MVP) solution could be built leveraging public cloud services that were currently (or soon to be) available in the Azure Government Cloud.  The resulting MVP was designed to fully support the capability for citizens to be able query, filter, correlate and display public FBI National Uniform Crime Reporting (UCR) information.  In addition, each of the questions provided in the RFI would be answerable using the application.</p>
+                            </div>
+                        </div>
+                        <div class="card card-red" style="box-shadow:none">
+                            <div class="card-header" style="height:40px;background-color:#22A7F0">
+                                <div class="card-title" style="padding-top:8px">
+                                    <div class="title" style="font-size:large">Solution</div>
+                                </div>
+                                <div class="clear-both"></div>
+                            </div>
+                            <div class="card-body" style="padding:10px 0px 0px 0px">
+                                <p style="text-align:justify">With a short amount of time to put together the MVP the first order of business was understanding the 2 gigabytes of sample data. Azure SQL Data Warehouse provided the tools to covert the XML based file and quickly create a database. To effectively answer the example question in the RFI the team choose PowerBI embedded to surface crime data dashboards and reports. A custom download page was built to allow the user to granularly select filter components and download a complete result set in .csv format.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card card-red" style="box-shadow:none">
+                            <div class="card-header" style="height:40px;background-color:#22A7F0">
+                                <div class="card-title" style="padding-top:8px">
+                                    <div class="title" style="font-size:large">Realtime Crime Statistics</div>
+                                </div>
+                                <div class="clear-both"></div>
+                            </div>
+                            <div class="card-body" style="padding:10px 0px 0px 0px">
+                                <iframe ID="iFrameEmbedReport" src="" style="width:100%;height:500px;" seamless scrolling="no" allowfullscreen="true"></iframe>
+                            </div>
+                        </div>
+                        <div class="card card-red" style="box-shadow:none">
+                            <div class="card-header" style="height:40px;background-color:#F4911D">
+                                <div class="card-title" style="padding-top:8px">
+                                    <div class="title" style="font-size:large">About AIS</div>
+                                </div>
+                                <div class="clear-both"></div>
+                            </div>
+                            <div class="card-body" style="padding:10px 0px 0px 0px">
+                                <p style="text-align:justify">AIS (Applied Information Sciences) provides software and systems engineering services to government agencies and businesses across the United States. We specialize in cloud services, DevOps, custom application development and IT services. For more information please visit our website: <a href="http://www.appliedinformationsciences.com/">http://www.appliedinformationsciences.com/ </a> </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript">
+    var iframe = document.getElementById('iFrameEmbedReport');
+    iframe.src = '@Model.Report.EmbedUrl'+'&filterPaneEnabled=false';
+    iframe.onload = postActionLoadReport;
+    function postActionLoadReport() {
+        accessToken = '@Model.AccessToken';
+        var m = { action: "loadReport", accessToken: accessToken };
+        message = JSON.stringify(m);
+        iframe = document.getElementById('iFrameEmbedReport');
+        iframe.contentWindow.postMessage(message, "*");
+    }
+</script>
