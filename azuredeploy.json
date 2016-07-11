@@ -40,6 +40,12 @@
       "metadata": {
         "description": "The password of the admin user of the SQL Server"
       }
+    },
+    "repoUrl": {
+      "type": "string"
+    },
+    "branch": {
+      "type": "string"
     }
   },
   "variables": {
@@ -68,7 +74,6 @@
       }
     },
     {
-      "comments": "Generalized from resource: '/subscriptions/66cacb0f-a871-4b0b-a161-bd04492f956a/resourceGroups/fbiucrdemo/providers/Microsoft.Storage/storageAccounts/fbiucrdemo'.",
       "type": "Microsoft.Storage/storageAccounts",
       "sku": {
         "name": "Standard_RAGRS",
@@ -148,7 +153,6 @@
       ]
     },
     {
-      "comments": "Generalized from resource: '/subscriptions/66cacb0f-a871-4b0b-a161-bd04492f956a/resourceGroups/fbiucrdemo/providers/Microsoft.Web/serverfarms/fbiucrdemoPlan'.",
       "type": "Microsoft.Web/serverfarms",
       "sku": {
         "name": "F1",
@@ -167,7 +171,6 @@
       "dependsOn": [ ]
     },
     {
-      "comments": "Generalized from resource: '/subscriptions/66cacb0f-a871-4b0b-a161-bd04492f956a/resourceGroups/fbiucrdemo/providers/Microsoft.Web/sites/fbiucrdemo'.",
       "type": "Microsoft.Web/sites",
       "kind": "WebApp",
       "name": "[parameters('siteName')]",
@@ -203,6 +206,18 @@
       },
       "resources": [
         {
+			    "apiVersion": "2014-11-01",
+			    "name": "web",
+			    "type": "sourcecontrols",
+			    "dependsOn": ["[resourceId('Microsoft.Web/Sites', parameters('siteName'))]",
+			    "[concat('Microsoft.Web/Sites/', parameters('siteName'), '/config/appSettings')]"],
+			    "properties": {
+				    "RepoUrl": "[parameters('repoUrl')]",
+				    "branch": "[parameters('branch')]",
+				    "IsManualIntegration": true
+			    }
+		    },
+        {
           "apiVersion": "2014-11-01",
           "name": "appSettings",
           "type": "config",
@@ -222,7 +237,7 @@
             "[concat('Microsoft.Web/Sites/', parameters('siteName'))]"
           ],
           "properties": {
-            "DefaultConnection": {
+            "UCR_DataEntities": {
               "value": "[concat('Data Source=tcp:', reference(concat('Microsoft.Sql/servers/', variables('sqlServerName'))).fullyQualifiedDomainName, ',1433;Initial Catalog=', variables('databaseName') ,';User Id=', parameters('sqlAdminLogin'), '@', variables('sqlServerName'), ';Password=', parameters('sqlAdminPassword'), ';')]",
               "type": "SQLServer"
             }
