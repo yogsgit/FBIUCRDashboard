@@ -52,7 +52,7 @@
     "storageContainer": "backup",
     "storagekey": "VlhE4KC90rQDiic8xJuUNRqvYs99/YOY4hrqw2tcxHXaquH4Oe9XPwoMokjj8btSgoGPcnx5OQKW2USh+GJBXg==",
     "storageAccount": "fbiucrdemo",
-    "serverfarmsName": "[parameters('siteName')farm]",
+    "serverfarmsName": "[concat(parameters('siteName'), 'farm')]",
     "databaseName": "UCR_Data",
     "sqlServerName": "[parameters('siteName')]"
   },
