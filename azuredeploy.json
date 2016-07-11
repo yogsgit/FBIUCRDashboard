@@ -3,34 +3,40 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "workspaceCollectionName": {
-      "type": "String"
+      "type": "String",
+      "minLength": 3,
+      "maxLength": 64,
+      "metadata": {
+        "description": "The PowerBI Embedded workspace collection name"
+      }
     },
     "storageAccountName": {
-      "type": "String"
-    },
-    "serverfarmsName": {
-      "type": "String"
+      "type": "String",
+      "minLength": 3,
+      "maxLength": 24,
+      "metadata": {
+        "description": "The storage account name"
+      }
     },
     "siteName": {
-      "type": "String"
-    },
-    "sqlServerName": {
-      "type": "String"
+      "type": "String",
+      "minLength": 2,
+      "maxLength": 60,
+      "metadata": {
+        "description": "The website name"
+      }
     },
     "sqlAdminLogin": {
       "type": "string",
+      "defaultValue": "azureuser",
+      "minLength": 1,
       "metadata": {
         "description": "The admin user of the SQL Server"
       }
     },
     "sqlAdminPassword": {
       "type": "securestring",
-      "metadata": {
-        "description": "The password of the admin user of the SQL Server"
-      }
-    },
-    "databaseName": {
-      "type": "string",
+      "minLength": 8,
       "metadata": {
         "description": "The password of the admin user of the SQL Server"
       }
@@ -45,7 +51,10 @@
     "backupFileName": "UCR_Data.bacpac",
     "storageContainer": "backup",
     "storagekey": "VlhE4KC90rQDiic8xJuUNRqvYs99/YOY4hrqw2tcxHXaquH4Oe9XPwoMokjj8btSgoGPcnx5OQKW2USh+GJBXg==",
-    "storageAccount": "fbiucrdemo"
+    "storageAccount": "fbiucrdemo",
+    "serverfarmsName": "[parameters('siteName')farm]",
+    "databaseName": "UCR_Data",
+    "sqlServerName": "[parameters('siteName')]"
   },
   "resources": [
     {
@@ -74,7 +83,7 @@
       "dependsOn": [ ]
     },
     {
-      "name": "[parameters('sqlServerName')]",
+      "name": "[variables('sqlServerName')]",
       "type": "Microsoft.Sql/servers",
       "location": "[resourceGroup().location]",
       "tags": {
@@ -88,7 +97,7 @@
       },
       "resources": [
         {
-          "name": "[parameters('databaseName')]",
+          "name": "[variables('databaseName')]",
           "type": "databases",
           "location": "[resourceGroup().location]",
           "tags": {
@@ -96,7 +105,7 @@
           },
           "apiVersion": "2014-04-01-preview",
           "dependsOn": [
-            "[parameters('sqlServerName')]"
+            "[variables('sqlServerName')]"
           ],
           "properties": {
             "edition": "[variables('edition')]",
@@ -110,7 +119,7 @@
               "type": "extensions",
               "apiVersion": "2014-04-01-preview",
               "dependsOn": [
-                "[concat('Microsoft.Sql/servers/', parameters('sqlServerName'), '/databases/', parameters('databaseName'))]"
+                "[concat('Microsoft.Sql/servers/', variables('sqlServerName'), '/databases/', variables('databaseName'))]"
               ],
               "properties": {
                 "storageKeyType": "[variables('storageKeyType')]",
@@ -127,7 +136,7 @@
           "type": "firewallrules",
           "apiVersion": "2014-04-01-preview",
           "dependsOn": [
-            "[parameters('sqlServerName')]"
+            "[variables('sqlServerName')]"
           ],
           "location": "[resourceGroup().location]",
           "name": "AllowAllWindowsAzureIps",
@@ -148,11 +157,11 @@
         "family": "F",
         "capacity": 0
       },
-      "name": "[parameters('serverfarmsName')]",
+      "name": "[variables('serverfarmsName')]",
       "apiVersion": "2015-08-01",
       "location": "South Central US",
       "properties": {
-        "name": "[parameters('serverfarmsName')]",
+        "name": "[variables('serverfarmsName')]",
         "numberOfWorkers": 0
       },
       "dependsOn": [ ]
@@ -190,7 +199,7 @@
             "ipBasedSslState": 0
           }
         ],
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarmsName'))]"
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('serverfarmsName'))]"
       },
       "resources": [
         {
@@ -214,17 +223,17 @@
           ],
           "properties": {
             "DefaultConnection": {
-              "value": "[concat('Data Source=tcp:', reference(concat('Microsoft.Sql/servers/', parameters('sqlServerName'))).fullyQualifiedDomainName, ',1433;Initial Catalog=', parameters('databaseName') ,';User Id=', parameters('sqlAdminLogin'), '@', parameters('sqlServerName'), ';Password=', parameters('sqlAdminPassword'), ';')]",
+              "value": "[concat('Data Source=tcp:', reference(concat('Microsoft.Sql/servers/', variables('sqlServerName'))).fullyQualifiedDomainName, ',1433;Initial Catalog=', variables('databaseName') ,';User Id=', parameters('sqlAdminLogin'), '@', variables('sqlServerName'), ';Password=', parameters('sqlAdminPassword'), ';')]",
               "type": "SQLServer"
             }
           }
         }
       ],
       "dependsOn": [
-        "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarmsName'))]",
+        "[resourceId('Microsoft.Web/serverfarms', variables('serverfarmsName'))]",
         "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]",
         "[resourceId('Microsoft.PowerBI/workspaceCollections', parameters('workspaceCollectionName'))]",
-        "[resourceId('Microsoft.Sql/servers', parameters('sqlServerName'))]"
+        "[resourceId('Microsoft.Sql/servers', variables('sqlServerName'))]"
       ]
     }
   ]
