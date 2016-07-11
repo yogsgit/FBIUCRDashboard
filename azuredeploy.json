@@ -54,7 +54,7 @@
     "storageAccount": "fbiucrdemo",
     "serverfarmsName": "[concat(parameters('siteName'), 'farm')]",
     "databaseName": "UCR_Data",
-    "sqlServerName": [ "toLower(parameters('siteName'))" ]
+    "sqlServerName": "[toLower(parameters('siteName'))]",
   },
   "resources": [
     {
