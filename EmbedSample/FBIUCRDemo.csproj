@@ -222,11 +222,18 @@
     <Content Include="Views\Download\NIBRS.cshtml" />
     <Content Include="Views\Download\Arson.cshtml" />
     <None Include="Properties\PublishProfiles\fbiucrdemo - Web Deploy.pubxml" />
-    <Content Include="ReportFiles\UCR Dashboard.pbix" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="ReportFiles\UCR Arson Trends.pbix" />
+    <Content Include="ReportFiles\UCR Crime Trends.pbix" />
+    <Content Include="ReportFiles\UCR Dashboard2.pbix" />
+    <Content Include="ReportFiles\UCR Interracial Homicides.pbix" />
+    <Content Include="ReportFiles\UCR Property Offenses.pbix" />
+    <Content Include="ReportFiles\UCR Sex Crime Arrestees.pbix" />
+    <Content Include="ReportFiles\UCR Sex Crime Offenders.pbix" />
+    <Content Include="ReportFiles\UCR Sex Crime Victims.pbix" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
