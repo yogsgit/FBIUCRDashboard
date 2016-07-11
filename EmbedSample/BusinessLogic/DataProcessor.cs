@@ -1,12 +1,8 @@
 ﻿using Newtonsoft.Json;
 using FBIUCRDemo.Models;
-using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
-using System.Web;
-//using System.Data.DataSetExtensions;
 
 namespace FBIUCRDemo.BusinessLogic
 {
@@ -83,14 +79,6 @@ namespace FBIUCRDemo.BusinessLogic
                 }
                 else
                 {
-                    //var cntInc = from row in dsresult.Tables[0].AsEnumerable()
-                    //             group row by row.Field<string>("Offense") into g
-                    //             select g;//new { Offense = g.Key, OffCount = g.Count() };
-
-                    //var topOff = cntInc.OrderByDescending(m => m.OffCount).First();
-
-
-                    //result.UniqueIncidents = cntInc.Distinct().Count();
                     result.SampleTable = GenerateArsonTable(dsresult);
                 }
             }
@@ -119,15 +107,15 @@ namespace FBIUCRDemo.BusinessLogic
                     sbTable.Append(TRODD);
                 else
                     sbTable.Append(TREVEN);
-                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[0]["IncidentNumber"].ToString()).Append(TDEND);
-                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[0]["IncidentDate"].ToString()).Append(TDEND);
-                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[0]["OffenseName"].ToString()).Append(TDEND);
-                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[0]["LocationName"].ToString()).Append(TDEND);
-                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[0]["WeaponName"].ToString()).Append(TDEND);
-                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[0]["VictimGender"].ToString()).Append(TDEND);
-                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[0]["VictimAge"].ToString()).Append(TDEND);
-                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[0]["OffenderGender"].ToString()).Append(TDEND);
-                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[0]["OffenderAge"].ToString()).Append(TDEND);
+                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[cnt]["IncidentNumber"].ToString()).Append(TDEND);
+                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[cnt]["IncidentDate"].ToString()).Append(TDEND);
+                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[cnt]["OffenseName"].ToString()).Append(TDEND);
+                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[cnt]["LocationName"].ToString()).Append(TDEND);
+                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[cnt]["WeaponName"].ToString()).Append(TDEND);
+                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[cnt]["VictimGender"].ToString()).Append(TDEND);
+                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[cnt]["VictimAge"].ToString()).Append(TDEND);
+                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[cnt]["OffenderGender"].ToString()).Append(TDEND);
+                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[cnt]["OffenderAge"].ToString()).Append(TDEND);
                 sbTable.Append(TREND);
             }
             sbTable.Append(TBODYEND);

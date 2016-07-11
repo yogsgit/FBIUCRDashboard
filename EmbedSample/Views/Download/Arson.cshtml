@@ -90,14 +90,6 @@
             </div>
             <div class="col-md-6 panel-body" style="padding:5px;border: 1px solid #dddddd;background-color:white;">
                 <div class="col-md-12">
-                    @*<label class="col-md-6 control-label" style="text-align:justify">Fields with multiple selections filter data by: </label>
-                        <div class="col-md-6" style="margin-bottom:4px">
-                            <select id="ddlFilterType" class="form-control select" style="width:100%" onchange="FilterData();">
-                                <option value="or">or (records have value a or b or both)</option>
-                                <option value="and">and (records have values a and b)</option>
-                            </select>
-                        </div>
-                        <hr width="100%"/>*@
                     <div class="col-md-6">
                         <a href="#" onclick="GetFilteredData();">
                             <div class="card green summary-inline">
@@ -138,20 +130,6 @@
                             </div>
                         </a>
                     </div>
-                    @*<div class="col-md-6" style="margin-top:5px;display:none" id="divUniInc">
-                            <a href="#">
-                                <div class="card yellow summary-inline">
-                                    <div class="card-body">
-                                        <i class="icon fa fa-thumbs-up fa-2x" id="thUniInc"></i>
-                                        <div class="content">
-                                            <div class="title" style="font-size:x-large" id="divUniIncNo">145785</div>
-                                            <div class="sub-title">unique incidents</div>
-                                        </div>
-                                        <div class="clear-both"></div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>*@
                     <div class="col-md-12" style="margin-top:5px;display:none" id="divDown">
                         <a href="#" onclick="CsvDownload();">
                             <div class="card blue summary-inline">
@@ -159,7 +137,6 @@
                                     <i class="icon fa fa-download fa-2x" id="thDown"></i>
                                     <div class="content">
                                         <div class="title" style="font-size:x-large">Your csv is ready for download</div>
-                                        @*<div class="sub-title">link valid for 30 minutes</div>*@
                                     </div>
                                     <div class="clear-both"></div>
                                 </div>
@@ -173,7 +150,6 @@
                                     <i class="icon fa fa-download fa-2x" id="thJsonDown"></i>
                                     <div class="content">
                                         <div class="title" style="font-size:x-large">Your json is ready for download</div>
-                                        @*<div class="sub-title">link valid for 30 minutes</div>*@
                                     </div>
                                     <div class="clear-both"></div>
                                 </div>
@@ -184,7 +160,7 @@
             </div>
         </div>
         <div class="col-md-12" style="border: 1px solid #dddddd;margin-top:5px;background-color:white;display:none" id="pnlGrid">
-            <label class="col-md-12 control-label" style="text-align:center;font-size:large;margin-top:5px;font-weight:normal">Top 50 records (download all the records in csv format)</label>
+            <label class="col-md-12 control-label" style="text-align:center;font-size:large;margin-top:5px;font-weight:normal">Top 50 records (download all the records in csv/ json format)</label>
             <div class="col-md-12 panel-body" style="border: 1px solid #dddddd;margin:5px;padding:15px;padding-bottom:0px">
                 <div class="dataTables_wrapper no-footer" id="DataTables_Table_1_wrapper">
                     <table class="table datatable_simple dataTable no-footer" id="dtDetails" role="grid"></table>
@@ -245,11 +221,6 @@
                       $("#thTotRecords").removeClass("icon fa fa-thumbs-up fa-2x");
                       $("#thTotRecords").addClass("icon fa fa-thumbs-down fa-2x");
 
-                      //$('#divUniInc').css('display', 'block');
-                      //$('#divUniIncNo').text("0");
-                      //$("#thUniInc").removeClass("icon fa fa-thumbs-up fa-2x");
-                      //$("#thUniInc").addClass("icon fa fa-thumbs-down fa-2x");
-
                       $('#pnlGrid').css('display', 'none');
                       $('#dtDetails').html('');
 
@@ -264,11 +235,6 @@
                       $('#divToTRecordsNo').text(result.TotalRecords);
                       $("#thTotRecords").removeClass("icon fa fa-thumbs-down fa-2x");
                       $("#thTotRecords").addClass("icon fa fa-thumbs-up fa-2x");
-
-                      //$('#divUniInc').css('display', 'block');
-                      //$('#divUniIncNo').text(result.UniqueIncidents);
-                      //$("#thUniInc").removeClass("icon fa fa-thumbs-down fa-2x");
-                      //$("#thUniInc").addClass("icon fa fa-thumbs-up fa-2x");
 
                       $('#pnlGrid').css('display', 'block');
                       $('#dtDetails').html(result.SampleTable);
