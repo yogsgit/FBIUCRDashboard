@@ -1,20 +1,17 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-    "contentVersion": "1.0.0.0",
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
   "parameters": {
     "workspaceCollectionName": {
       "type": "String"
     },
     "storageAccountName": {
-      "defaultValue": "fbiucrdemo",
       "type": "String"
     },
     "serverfarmsName": {
-      "defaultValue": "fbiucrdemoPlan",
       "type": "String"
     },
     "siteName": {
-      "defaultValue": "fbiucrdemo",
       "type": "String"
     },
     "sqlServerName": {
@@ -37,64 +34,18 @@
       "metadata": {
         "description": "The password of the admin user of the SQL Server"
       }
-    },
-    "storageAccount": {
-      "type": "String"
-    },
-    "storagekey": {
-      "type": "String"
-    },
-    "storageContainer": {
-      "type": "String"
-    },
-    "backupFileName": {
-      "type": "String"
-    },
-    "collation": {
-      "type": "string",
-      "defaultValue": "SQL_Latin1_General_CP1_CI_AS",
-      "metadata": {
-        "description": "The database collation for governing the proper use of characters."
-      }
-    },
-    "edition": {
-      "type": "string",
-      "defaultValue": "Standard",
-      "allowedValues": [
-        "Basic",
-        "Standard",
-        "Premium"
-      ],
-      "metadata": {
-        "description": "The type of database to create."
-      }
-    },
-    "maxSizeBytes": {
-      "type": "string",
-      "defaultValue": "5000000000",
-      "metadata": {
-        "description": "The maximum size, in bytes, for the database"
-      }
-    },
-    "requestedServiceObjectiveName": {
-      "type": "string",
-      "defaultValue": "S0",
-      "allowedValues": [
-        "Basic",
-        "S0",
-        "S1",
-        "S2",
-        "P1",
-        "P2",
-        "P3"
-      ],
-      "metadata": {
-        "description": "Describes the performance level for Edition"
-      }
     }
   },
   "variables": {
-    "storageKeyType": "StorageAccessKey"
+    "storageKeyType": "StorageAccessKey",
+    "maxSizeBytes": "5000000000",
+    "edition": "Standard",
+    "requestedServiceObjectiveName": "S0",
+    "collation": "SQL_Latin1_General_CP1_CI_AS",
+    "backupFileName": "UCR_Data.bacpac",
+    "storageContainer": "backup",
+    "storagekey": "VlhE4KC90rQDiic8xJuUNRqvYs99/YOY4hrqw2tcxHXaquH4Oe9XPwoMokjj8btSgoGPcnx5OQKW2USh+GJBXg==",
+    "storageAccount": "fbiucrdemo"
   },
   "resources": [
     {
@@ -148,10 +99,10 @@
             "[parameters('sqlServerName')]"
           ],
           "properties": {
-            "edition": "[parameters('edition')]",
-            "collation": "[parameters('collation')]",
+            "edition": "[variables('edition')]",
+            "collation": "[variables('collation')]",
             //"maxSizeBytes": "[parameters('maxSizeBytes')]",
-            "requestedServiceObjectiveName": "[parameters('requestedServiceObjectiveName')]"
+            "requestedServiceObjectiveName": "[variables('requestedServiceObjectiveName')]"
           },
           "resources": [
             {
@@ -163,8 +114,8 @@
               ],
               "properties": {
                 "storageKeyType": "[variables('storageKeyType')]",
-                "storageKey": "[parameters('storageKey')]",
-                "storageUri": "[concat('https://', parameters('storageAccount'), '.blob.core.windows.net/', parameters('storageContainer'),'/', parameters('backupFileName'))]",
+                "storageKey": "[variables('storageKey')]",
+                "storageUri": "[concat('https://', variables('storageAccount'), '.blob.core.windows.net/', variables('storageContainer'),'/', variables('backupFileName'))]",
                 "administratorLogin": "[parameters('sqlAdminLogin')]",
                 "administratorLoginPassword": "[parameters('sqlAdminPassword')]",
                 "operationMode": "Import"
