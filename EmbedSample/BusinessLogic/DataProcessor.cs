@@ -107,15 +107,15 @@ namespace FBIUCRDemo.BusinessLogic
                     sbTable.Append(TRODD);
                 else
                     sbTable.Append(TREVEN);
-                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[cnt]["IncidentNumber"].ToString()).Append(TDEND);
-                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[cnt]["IncidentDate"].ToString()).Append(TDEND);
-                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[cnt]["OffenseName"].ToString()).Append(TDEND);
-                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[cnt]["LocationName"].ToString()).Append(TDEND);
-                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[cnt]["WeaponName"].ToString()).Append(TDEND);
-                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[cnt]["VictimGender"].ToString()).Append(TDEND);
-                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[cnt]["VictimAge"].ToString()).Append(TDEND);
-                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[cnt]["OffenderGender"].ToString()).Append(TDEND);
-                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[cnt]["OffenderAge"].ToString()).Append(TDEND);
+                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[i]["IncidentNumber"].ToString()).Append(TDEND);
+                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[i]["IncidentDate"].ToString()).Append(TDEND);
+                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[i]["OffenseName"].ToString()).Append(TDEND);
+                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[i]["LocationName"].ToString()).Append(TDEND);
+                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[i]["WeaponName"].ToString()).Append(TDEND);
+                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[i]["VictimGender"].ToString()).Append(TDEND);
+                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[i]["VictimAge"].ToString()).Append(TDEND);
+                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[i]["OffenderGender"].ToString()).Append(TDEND);
+                sbTable.Append(TD).Append(dsResult.Tables[0].Rows[i]["OffenderAge"].ToString()).Append(TDEND);
                 sbTable.Append(TREND);
             }
             sbTable.Append(TBODYEND);
