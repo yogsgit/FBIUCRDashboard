@@ -230,11 +230,9 @@
     <Content Include="ReportFiles\UCR Dashboard2.pbix" />
     <Content Include="ReportFiles\UCR Interracial Homicides.pbix" />
     <Content Include="ReportFiles\UCR Property Offenses.pbix" />
-    <Content Include="ReportFiles\UCR Sex Crime Arrestees.pbix" />
-    <Content Include="ReportFiles\UCR Sex Crime Offenders.pbix" />
-    <Content Include="ReportFiles\UCR Sex Crime Victims.pbix" />
     <Content Include="ReportFiles\UCR Crime Trends.pbix" />
     <Content Include="ReportFiles\UCR Crime Incidents Map.pbix" />
+    <Content Include="ReportFiles\UCR Sex Crimes.pbix" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
