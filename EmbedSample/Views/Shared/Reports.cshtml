@@ -20,7 +20,7 @@
             <ul class="nav navbar-nav">
                 @foreach (var report in Model.Reports)
                 {
-                    if (report.Name == "UCRDashboard")
+                    if (report.Name.ToLower().Contains("dashboard"))
                     {
                         continue;
                     }

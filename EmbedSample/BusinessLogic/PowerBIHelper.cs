@@ -34,7 +34,7 @@ namespace FBIUCRDemo.BusinessLogic
                 foreach (string file in files)
                 {
                     var temp = file.Substring(file.LastIndexOf('\\') + 1);
-                    var datasetName = file.ToLower().Contains("dashboard") ? "UCRDashboard" : temp.Substring(0, temp.Length - 5);
+                    var datasetName = temp.Substring(0, temp.Length - 5);
                     var filePath = file;
                     var import = ImportPbix(workspaceCollection, workspaceId, datasetName, filePath, accessKey, apiUrl);
                 }

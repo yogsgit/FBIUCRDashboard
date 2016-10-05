@@ -4,22 +4,26 @@
     </ol>
 }
 
-@model ReportViewModel
+@model List<ReportViewModel>
 <div class="side-body padding-top">
-    <div class="row col-md-12" style="padding-right:0px;margin-right:-15px">
+    @*<div class="row col-md-12" style="padding-right:0px;margin-right:-15px">
         <img src="../img/aisbanner.png" style="width:100%;height:150px;padding-right:0px;margin-right:0px" />
-    </div>
+    </div>*@
     <div class="row  no-margin-bottom">
         <div class="col-md-12">
             <div class="card card-success" style="margin-right:15px">
                 <div class="card-header">
                     <div class="card-title" style="width:100%;padding-bottom:0.6em;padding-top:0.6em">
-                        <div class="title" style="font-size:x-large;text-align: center;width:100%">AIS Models FBI Uniform Crime Reporting Data</div>
+                        <div class="title" style="font-size:x-large;text-align: center;width:100%">FBI Uniform Crime Reporting Data</div>
                     </div>
                     <div class="clear-both"></div>
                 </div>
+                
                 <div class="card-body">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
+                    <p style="text-align:justify;font-size:medium">The FBI’s Uniform Crime Reporting (UCR) Program is a nationwide, cooperative statistical effort of more than 18,000 city, university and college, county, state, tribal, and federal law enforcement agencies voluntarily reporting data on crimes brought to their attention.  </p>
+                    </div>                
+    @*<div class="col-md-6">
                         <p style="text-align:justify">The FBI’s Uniform Crime Reporting (UCR) Program is a nationwide, cooperative statistical effort of more than 18,000 city, university and college, county, state, tribal, and federal law enforcement agencies voluntarily reporting data on crimes brought to their attention.  </p>
 
                         <div class="card card-red" style="box-shadow:none">
@@ -56,6 +60,19 @@
                                 <p style="text-align:justify">With a short amount of time to put together the MVP the first order of business was understanding the 2 gigabytes of sample data. Azure SQL Data Warehouse provided the tools to covert the XML based file and quickly create a database. To effectively answer the example question in the RFI the team choose PowerBI embedded to surface crime data dashboards and reports. A custom download page was built to allow the user to granularly select filter components and download a complete result set in .csv format.</p>
                             </div>
                         </div>
+                    </div>*@
+                    <div class="col-md-6">
+                        <div class="card card-red" style="box-shadow:none">
+                            <div class="card-header" style="height:40px;background-color:#22A7F0">
+                                <div class="card-title" style="padding-top:8px">
+                                    <div class="title" style="font-size:large">Crime Trends</div>
+                                </div>
+                                <div class="clear-both"></div>
+                            </div>
+                            <div class="card-body" style="padding:10px 0px 0px 0px">
+                                <iframe ID="iFrameEmbedReport2" src="" style="width:100%;height:500px;" seamless scrolling="no" allowfullscreen="true"></iframe>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-6">
                         <div class="card card-red" style="box-shadow:none">
@@ -69,15 +86,25 @@
                                 <iframe ID="iFrameEmbedReport" src="" style="width:100%;height:500px;" seamless scrolling="no" allowfullscreen="true"></iframe>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-md-12"></div>
+                    <div class="col-md-12"></div>
+                    <div class="col-md-12"></div>
+                    <div class="col-md-12"></div>
+                    <div class="col-md-12"></div>
+                    <div class="col-md-12"></div>
+                    <div class="col-md-12"></div>
+                    <div class="col-md-12"></div>
+                    <div class="col-md-12">
                         <div class="card card-red" style="box-shadow:none">
                             <div class="card-header" style="height:40px;background-color:#F4911D">
                                 <div class="card-title" style="padding-top:8px">
-                                    <div class="title" style="font-size:large">About AIS</div>
+                                    <div class="title" style="font-size:large;text-align: center;width:100%">About AIS</div>
                                 </div>
                                 <div class="clear-both"></div>
                             </div>
                             <div class="card-body" style="padding:10px 0px 0px 0px">
-                                <p style="text-align:justify">AIS (Applied Information Sciences) provides software and systems engineering services to government agencies and businesses across the United States. We specialize in cloud services, DevOps, custom application development and IT services. For more information please visit our website: <a href="http://www.appliedinformationsciences.com/">http://www.appliedinformationsciences.com/ </a> </p>
+                                <p style="text-align:justify;font-size:medium">AIS (Applied Information Sciences) provides software and systems engineering services to government agencies and businesses across the United States. We specialize in cloud services, DevOps, custom application development and IT services. For more information please visit our website: <a href="http://www.appliedinformationsciences.com/">http://www.appliedinformationsciences.com/ </a> </p>
                             </div>
                         </div>
                     </div>
@@ -88,13 +115,24 @@
     </div>
 <script type="text/javascript">
     var iframe = document.getElementById('iFrameEmbedReport');
-    iframe.src = '@Model.Report.EmbedUrl'+'&filterPaneEnabled=false';
+    iframe.src = '@Model.Where(m => m.Report.Name == "UCR Dashboard").FirstOrDefault().Report.EmbedUrl'+'&filterPaneEnabled=false';
     iframe.onload = postActionLoadReport;
     function postActionLoadReport() {
-        accessToken = '@Model.AccessToken';
+        accessToken = '@Model.Where(m => m.Report.Name == "UCR Dashboard").FirstOrDefault().AccessToken';
         var m = { action: "loadReport", accessToken: accessToken };
         message = JSON.stringify(m);
         iframe = document.getElementById('iFrameEmbedReport');
         iframe.contentWindow.postMessage(message, "*");
+    }
+
+    var iframe1 = document.getElementById('iFrameEmbedReport2');
+    iframe1.src = '@Model.Where(m => m.Report.Name == "UCR Crime Dashboard").FirstOrDefault().Report.EmbedUrl' + '&filterPaneEnabled=false';
+    iframe1.onload = postActionLoadReport1;
+    function postActionLoadReport1() {
+        accessToken1 = '@Model.Where(m => m.Report.Name == "UCR Crime Dashboard").FirstOrDefault().AccessToken';
+        var m1 = { action: "loadReport", accessToken: accessToken1 };
+        message1 = JSON.stringify(m1);
+        iframe1 = document.getElementById('iFrameEmbedReport2');
+        iframe1.contentWindow.postMessage(message1, "*");
     }
 </script>

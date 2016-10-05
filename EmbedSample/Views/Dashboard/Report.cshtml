@@ -3,7 +3,7 @@
 @section Breadcrumbs {
     <ol class="breadcrumb navbar-breadcrumb">
         <li>Reports</li>
-        <li class="active">@Model.Report.Name</li>
+        <li class="active">@Model.Report.Name.Remove(0,4)</li>
     </ol>
 }
 <div class="side-body padding-top">
