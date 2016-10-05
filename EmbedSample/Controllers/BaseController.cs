@@ -25,11 +25,11 @@ namespace FBIUCRDemo.Controllers
             this.workspaceCollection = ConfigurationManager.AppSettings["powerbiWorkspaceCollection"];
             this.accessKey = ConfigurationManager.AppSettings["powerbiAccessKey"];
             this.apiUrl = ConfigurationManager.AppSettings["powerbiApiUrl"];
-            System.Web.HttpContext.Current.Application["WorkspaceID"] = ConfigurationManager.AppSettings["powerbiWorkspaceId"];
-            //if (System.Web.HttpContext.Current.Application["WorkspaceID"] == null)
-            //{
-            //    PowerBIHelper.UploadReports();
-            //}
+            //System.Web.HttpContext.Current.Application["WorkspaceID"] = ConfigurationManager.AppSettings["powerbiWorkspaceId"];
+            if (System.Web.HttpContext.Current.Application["WorkspaceID"] == null)
+            {
+                PowerBIHelper.UploadReports();
+            }
             this.workspaceId = System.Web.HttpContext.Current.Application["WorkspaceID"].ToString();
         }
 

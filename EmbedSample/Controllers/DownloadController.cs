@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FBIUCRDemo.Controllers
 {
-    public class DownloadController : Controller
+    public class DownloadController : BaseController
     {
         public DownloadController():base()
         {
